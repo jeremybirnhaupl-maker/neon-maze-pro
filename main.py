@@ -39,35 +39,7 @@ def pause():
         pass
 
 
-def _install_pygame():
-    import importlib
-    for pkg in ("pygame", "pygame-ce"):
-        print(f"Installiere {pkg} ...")
-        try:
-            subprocess.check_call([sys.executable, "-m", "pip", "install", pkg])
-            importlib.invalidate_caches()
-            import pygame as _pg  # noqa: F401
-            return True
-        except Exception as exc:
-            print(f"  {pkg} fehlgeschlagen: {exc}")
-    return False
-
-
-try:
-    import pygame
-except ImportError:
-    print("pygame ist nicht installiert - versuche automatische Installation ...")
-    if _install_pygame():
-        import pygame
-    else:
-        print("\nFEHLER: pygame konnte nicht installiert werden.")
-        print(f"Dein Python: {sys.version}")
-        print("Tipp: Für sehr neue Python-Versionen (3.13 / 3.14) gibt es oft noch kein")
-        print("pygame. Installiere dann Python 3.12 von python.org (Haken bei")
-        print("'Add Python to PATH' setzen) und starte das Spiel erneut.")
-        pause()
-        sys.exit(1)
-
+import pygame
 # ============================================================== Konstanten
 W, H = 1280, 720
 TS = 44                       # Kachelgröße in Pixeln
